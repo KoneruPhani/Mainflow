@@ -1,0 +1,232 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #1c1c1c;
+    color: white;
+}
+
+header .logo h1 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Hero Section Styles */
+#hero {
+    height: 500px;
+    background-image: url('images/car.jpg');
+    background-size: cover;
+    background-position: center;
+    /* color: white; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+}
+
+#hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+#hero p {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.cta-button {
+    padding: 15px 30px;
+    /* background-color: #ff6347; */
+    background-color:skyblue;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.cta-button:hover {
+    background-color: #ff4500;
+}
+
+/* Special Offer Section */
+#special-offer {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #ff6347;
+    color: white;
+}
+
+#special-offer h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#special-offer .offer-details h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+#special-offer p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Features Section Styles */
+#features {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+#features h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.features-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.feature {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 30%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.feature img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.feature h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    font-size: 16px;
+}
+
+/* Contact Section Styles */
+#contact {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+#contact h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#contact p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+footer p {
+    font-size: 14px;
+}
+
+footer a {
+    color: #ff6347;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .features-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature {
+        width: 80%;
+    }
+
+    #hero h1 {
+        font-size: 36px;
+    }
+
+    #hero p {
+        font-size: 18px;
+    }
+
+    .cta-button {
+        font-size: 14px;
+        padding: 12px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header .logo h1 {
+        font-size: 28px;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        margin-top: 15px;
+    }
+
+    header nav ul li {
+        margin-bottom: 10px;
+    }
+}

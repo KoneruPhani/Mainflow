@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        /* Reset some default browser styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .calculator {
+            display: grid;
+            grid-template-rows: 1fr 4fr;
+            width: 300px;
+            background-color: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .display {
+            background-color: #222;
+            color: white;
+            text-align: right;
+            padding: 20px;
+            font-size: 2em;
+            word-wrap: break-word;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 1px;
+            background-color: #444;
+        }
+
+        .button {
+            padding: 20px;
+            font-size: 1.5em;
+            background-color: #555;
+            color: white;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #666;
+        }
+
+        .button.operator {
+            background-color: #f39c12;
+        }
+
+        .button.operator:hover {
+            background-color: #e67e22;
+        }
+
+        .button.equal {
+            background-color: #27ae60;
+        }
+
+        .button.equal:hover {
+            background-color: #2ecc71;
+        }
+
+        .button.clear {
+            background-color: #e74c3c;
+        }
+
+        .button.clear:hover {
+            background-color: #c0392b;
+        }
+
+        .button.zero {
+            grid-column: span 2;
+        }
+
+    </style>
+</head>
+<body>
+
+    <section class="calculator">
+        <!-- Display section -->
+        <div id="display" class="display">0</div>
+
+        <!-- Buttons section -->
+        <div class="buttons">
+            <button class="button clear" data-type="clear">C</button>
+            <button class="button" data-type="operator">÷</button>
+            <button class="button" data-type="operator">×</button>
+            <button class="button" data-type="operator">-</button>
+
+            <button class="button" data-type="number">7</button>
+            <button class="button" data-type="number">8</button>
+            <button class="button" data-type="number">9</button>
+            <button class="button" data-type="operator">+</button>
+
+            <button class="button" data-type="number">4</button>
+            <button class="button" data-type="number">5</button>
+            <button class="button" data-type="number">6</button>
+            <button class="button" data-type="operator">×</button>
+
+            <button class="button" data-type="number">1</button>
+            <button class="button" data-type="number">2</button>
+            <button class="button" data-type="number">3</button>
+            <button class="button equal" data-type="equal">=</button>
+
+            <button class="button zero" data-type="number">0</button>
+            <button class="button" data-type="decimal">.</button>
+        </div>
+    </section>
+
+    <script>
+        const display = document.getElementById('display');
+        let currentInput = '';
+        let operator = '';
+        let previousInput = '';
+        let fullOperation = ''; // New variable to store the full operation
+
+        const buttons = document.querySelectorAll('.button');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const value = button.textContent;
+                const type = button.getAttribute('data-type');
+                
+                if (type === 'number') {
+                    handleNumber(value);
+                } else if (type === 'operator') {
+                    handleOperator(value);
+                } else if (type === 'equal') {
+                    calculateResult();
+                } else if (type === 'clear') {
+                    clearDisplay();
+                } else if (type === 'decimal') {
+                    handleDecimal();
+                }
+            });
+        });
+
+        function handleNumber(value) {
+            if (currentInput.length < 10) {  // Limit input length
+                currentInput += value;
+                updateDisplay();
+            }
+        }
+
+        function handleOperator(value) {
+            if (currentInput !== '') {
+                previousInput = currentInput;
+                operator = value;
+                fullOperation += currentInput + ' ' + operator + ' '; // Append current input and operator to full operation
+                currentInput = '';
+                updateDisplay();
+            }
+        }
+
+        function calculateResult() {
+            if (previousInput !== '' && currentInput !== '') {
+                let result = '';
+                switch (operator) {
+                    case '+':
+                        result = parseFloat(previousInput) + parseFloat(currentInput);
+                        break;
+                    case '-':
+                        result = parseFloat(previousInput) - parseFloat(currentInput);
+                        break;
+                    case '×':
+                        result = parseFloat(previousInput) * parseFloat(currentInput);
+                        break;
+                    case '÷':
+                        result = parseFloat(previousInput) / parseFloat(currentInput);
+                        break;
+                }
+                fullOperation += currentInput + ' = ' + result; // Show the full operation with the result
+                display.textContent = fullOperation;
+                previousInput = result.toString(); // Store result for further operations
+                currentInput = '';
+                operator = '';
+                fullOperation = ''; // Reset after displaying full operation
+            }
+        }
+
+        function clearDisplay() {
+            currentInput = '';
+            previousInput = '';
+            operator = '';
+            fullOperation = ''; // Reset full operation
+            display.textContent = '0';
+        }
+
+        function handleDecimal() {
+            if (!currentInput.includes('.')) {
+                currentInput += '.';
+                updateDisplay();
+            }
+        }
+
+        function updateDisplay() {
+            // Show the full operation followed by the current input
+            display.textContent = fullOperation + currentInput;
+        }
+
+    </script>
+
+</body>
+</html>
